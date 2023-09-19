@@ -1,19 +1,55 @@
 import Button from "components/button/Button";
 import Input from "components/input/Input";
 import style from "./css/Template.module.sass";
+import { useState } from "react";
 
 function Template() {
+    const [skills, setSkills] = useState([
+        { name: "", years: "", competency: "" },
+        { name: "", years: "", competency: "" },
+        { name: "", years: "", competency: "" },
+        { name: "", years: "", competency: "" },
+    ]);
+
+    const inputList = [
+        { label: "Skill", placeholder: "Add Skill " },
+        {
+            label: "Years of professional experience",
+            placeholder: "Enter experience years ",
+        },
+        { label: "Competency", placeholder: "Enter Competency" },
+    ];
+
+    function addField() {
+        const newField = { name: "", years: "", competency: "" };
+        setSkills([...skills, newField]);
+    }
+
+    function removeField(index) {
+        const data = skills.filter((x, y) => y !== index);
+        setSkills(data);
+    }
+
     return (
         <div className={style["container"]}>
-            <div className={style["con-input"]}>
-                {[1, 1, 1].map((x, y) => (
-                    <Input key={y} />
+            {skills.length > 0 &&
+                skills.map((skill, idx) => (
+                    <div className={style["con-input"]}>
+                        {inputList.map((x, y) => (
+                            <Input
+                                key={y}
+                                label={x.label}
+                                placeholder={`${x.placeholder} ${
+                                    y === 0 ? idx + 1 : ""
+                                }`}
+                            />
+                        ))}
+                        <i
+                            onClick={() => removeField(idx)}
+                            className={`${style["delete-btn"]} fa-solid fa-trash-can`}
+                        ></i>
+                    </div>
                 ))}
-
-                <i
-                    className={`${style["delete-btn"]} fa-solid fa-trash-can`}
-                ></i>
-            </div>
             <Button
                 text={
                     <div>
@@ -21,6 +57,7 @@ function Template() {
                         <p>Add New Section</p>
                     </div>
                 }
+                onClick={addField}
             />
         </div>
     );

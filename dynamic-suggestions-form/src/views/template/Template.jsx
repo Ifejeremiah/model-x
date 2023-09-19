@@ -6,9 +6,6 @@ import { useState } from "react";
 function Template() {
     const [skills, setSkills] = useState([
         { name: "", years: "", competency: "" },
-        { name: "", years: "", competency: "" },
-        { name: "", years: "", competency: "" },
-        { name: "", years: "", competency: "" },
     ]);
 
     const inputList = [
@@ -34,7 +31,7 @@ function Template() {
         <div className={style["container"]}>
             {skills.length > 0 &&
                 skills.map((skill, idx) => (
-                    <div className={style["con-input"]}>
+                    <div className={style["con-input"]} key={idx}>
                         {inputList.map((x, y) => (
                             <Input
                                 key={y}

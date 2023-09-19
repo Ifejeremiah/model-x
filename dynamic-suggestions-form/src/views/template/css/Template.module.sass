@@ -1,0 +1,21 @@
+.container
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  height: 50vh
+
+  .con-input
+    display: flex
+    flex-direction: column
+    gap: 16px
+    margin-bottom: 20px
+
+    @media (min-width: 992px)
+      align-items: center
+      flex-direction: row
+
+    .delete-btn
+      color: #f01818
+      cursor: pointer
+      font-size: 1.2rem
